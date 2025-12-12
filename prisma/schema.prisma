@@ -1,0 +1,33 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model Users {
+  id         Int        @id @default(autoincrement())
+  name       String
+  lastOnline DateTime
+  cart       Products[]
+}
+
+model Products {
+  id       Int      @id @default(autoincrement())
+  name     String
+  category String
+  brand    String
+  createdAt  DateTime    @default(now())
+  price    Decimal  @db.Decimal(10, 2)
+  quantity Int
+  userId   Int?
+  user     Users?   @relation(fields: [userId], references: [id])
+
+  @@index([userId], map: "Products_userId_fkey")
+}
+
+model Categories {
+  id   Int    @id @default(autoincrement())
+  name String
+}
