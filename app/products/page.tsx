@@ -39,7 +39,7 @@ const Page = async () => {
 
   return (
     <div className="grid grid-cols-4 gap-4">
-      helllo
+      {/* helllo */}
       {dataFormatted?.map((item) => (
        
         <ProductCard key={item.id} products={item} />
