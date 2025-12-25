@@ -5,12 +5,15 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { serverName } from "../page";
+// import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  // const navigate = useNavigate()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,8 +36,12 @@ export default function Login() {
       }
 
       const data = await res.json();
+      localStorage.setItem('currentUser', data.user.id)
+      localStorage.setItem('currentUsername', data.user.name)
+
+      window.location.href = "/products"
       console.log("Login success:", data);
-      // redirect / save token / etc.
+
     } catch (err: any) {
       setError(err.message);
     } finally {
