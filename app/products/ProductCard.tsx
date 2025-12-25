@@ -37,14 +37,14 @@ const ProductCard = ({ products }) => {
 
 
 
-  const category = products.category ? JSON.parse(products.category) : [];
+  // const category = products.category ? JSON.parse(products.category) : [];
 
-  const categoryNames = category.map((item: number) => {
-    const name  = allCategories.find(cat => cat.id == item)
-    return (
-      {catId: item, catName: name}
-    )
-  })
+  // const categoryNames = category.map((item: number) => {
+  //   const name  = allCategories.find(cat => cat.id == item)
+  //   return (
+  //     {catId: item, catName: name}
+  //   )
+  // })
 
   // console.log(categoryNames)
 

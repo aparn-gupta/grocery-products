@@ -7,27 +7,39 @@ datasource db {
 }
 
 model Users {
-  id         Int        @id @default(autoincrement())
+  id         Int      @id @default(autoincrement())
+  email      String    @unique
   name       String
   lastOnline DateTime
-  cart       Products[]
+  createdAt  DateTime
+  password   String?
+  carts      Cart[]
 }
 
 model Products {
-  id       Int      @id @default(autoincrement())
-  name     String
-  category String
-  brand    String
-  createdAt  DateTime    @default(now())
-  price    Decimal  @db.Decimal(10, 2)
-  quantity Int
-  userId   Int?
-  user     Users?   @relation(fields: [userId], references: [id])
+  id        Int      @id @default(autoincrement())
+  name      String
+  categoryId  Int    @default(0)
+  brand     String
+  createdAt DateTime @default(now())
+  price     Decimal  @db.Decimal(10, 2)
+  quantity  Int
+  category  Categories @relation(fields: [categoryId], references: [id])
 
-  @@index([userId], map: "Products_userId_fkey")
+  carts Cart[]
 }
 
 model Categories {
   id   Int    @id @default(autoincrement())
   name String
+  product  Products[]
+}
+
+model Cart {
+  id        Int      @id @default(autoincrement())
+  productId Int
+  userId    Int
+  Quantity  Int
+  user      Users    @relation(fields: [userId], references: [id])
+  product   Products @relation(fields: [productId], references: [id])
 }
