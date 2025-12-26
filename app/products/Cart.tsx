@@ -43,6 +43,17 @@ const Cart = () => {
     }
   };
 
+  let total = 0
+
+  for (let each of cartData) {
+    total += (Number(each.Quantity) + Number(each.product.price))
+
+  }
+
+  console.log("total: ", total)
+
+
+
   useEffect(() => {
     fetchCartData()
 
@@ -69,6 +80,13 @@ const Cart = () => {
       <DialogTitle>Your Cart</DialogTitle>
       <DialogDescription>
        <table className='w-full mt-6'>
+        <tr>
+          <th>Item</th>
+          <th>Brand</th>
+          <th>Quantity</th>
+          <th>Price/pack</th>
+          <th>Total</th>
+        </tr>
         {cartData.map((item) => (
           
             <tr className='my-4'> 
@@ -76,15 +94,19 @@ const Cart = () => {
               <th>{item.product.name}</th>
               <th>{item.product.brand}</th>
 
-              <th>{item.Quantity}</th>
-              <th>${item.product.price}/unit</th>
+              <th className='text-blue-500'>{item.Quantity}</th>
+              <th>${item.product.price}</th>
 
-              <th>${item.product.price * item.Quantity}</th>
+              <th className='text-green-500'>${item.product.price * item.Quantity}</th>
 
                </tr>
           
         ))}
+
+       
        </table>
+
+       <div className='flex justify-end mt-4'>Total : <span className='text-green-500 font-semibold'>${total}</span></div>
       </DialogDescription>
     </DialogHeader>
   </DialogContent>
