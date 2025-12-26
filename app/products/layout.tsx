@@ -1,48 +1,52 @@
+
+
 import React, { ReactNode } from "react";
 
-import { prisma } from "@/lib/prisma";
+// import { prisma } from "@/lib/prisma";
 import Cart from "./Cart";
-import { createClient } from "redis";
-
-let currentUser = 4;
-
-let client = createClient();
-
-client.connect();
-
-client.on("error", () => {
-  console.log("Error connecting to redis client");
-});
-
-const fetchCartData = async () => {
-  try {
-
-    
+// import { createClient } from "redis";
 
 
 
-    const cartData = await prisma.cart.findMany({
-      where: {
-        userId: currentUser,
-      },
-    });
 
-    console.log(cartData);
+// let sessionUser = 3;
 
-    //   await client.set("newley1234", "myvalue1234")
+// let client = createClient();
 
-    // const checking = await client.get("newley1234")
+// client.connect();
 
-    // console.log("checkingredis: ", checking)
+// client.on("error", () => {
+//   console.log("Error connecting to redis client");
+// });
 
-    return cartData;
-  } catch (err) {
-    console.log(err);
-  }
-};
+// const fetchCartData = async () => {
+//   try {
+//     const cartData = await prisma.cart.findMany({
+//       where: {
+//         userId: sessionUser,
+//       },
+//     });
+//     console.log(cartData);
+//     //   await client.set("newley1234", "myvalue1234")
+//     // const checking = await client.get("newley1234")
+//     // console.log("checkingredis: ", checking)
+//     return cartData;
+//   } catch (err) {
+//     console.log(err);
+//   }
 
-const Layout = async ({ children }: { children: ReactNode }) => {
-  let data = await fetchCartData();
+// };
+
+
+
+
+
+const Layout =  ({ children }: { children: ReactNode }) => {
+
+ 
+  // console.log( "here" + localStorage.getItem("currentUser"))
+
+  // let data = await fetchCartData();
 
   return (
     <div className="pt-10">
@@ -56,7 +60,7 @@ const Layout = async ({ children }: { children: ReactNode }) => {
      <div className='absolute top-0 left-3'><Badge variant={"default"}>2</Badge></div>
 
      </div> */}
-          <Cart data={data} />
+          <Cart />
         </div>
 
         {children}

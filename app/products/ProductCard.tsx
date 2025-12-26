@@ -36,6 +36,32 @@ const ProductCard = ({ products }) => {
   }, []);
 
 
+  let sessionUser  = localStorage.getItem("currentUser")
+
+
+  const handleAddCart = async (productId) => {
+
+    const url = `${serverName}/cart/${sessionUser}/${productId}`
+
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type" : "application/json"
+
+      }
+    })
+
+    console.log(url)
+
+    // const result  = await res.json()
+
+    // console.log(result)
+
+  }
+
+
+
+
 
   // const category = products.category ? JSON.parse(products.category) : [];
 
@@ -65,7 +91,7 @@ const ProductCard = ({ products }) => {
         </CardContent>
         <CardFooter>
           {/* <p>Card Footer</p> */}
-          <Button size={"sm"} className="bg-green-700 hover:bg-green-600 hover:scale-105" > <Plus/>  Add to Cart</Button>
+          <Button size={"sm"} className="bg-green-700 hover:bg-green-600 hover:scale-105" onClick={() => handleAddCart(products.id)} > <Plus/>  Add to Cart</Button>
         </CardFooter>
       </Card>
     </div>

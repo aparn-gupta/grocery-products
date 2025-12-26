@@ -33,7 +33,7 @@ const Page = async () => {
     {...item, price: item.price.toNumber()}
   ))
 
-  console.log(dataFormatted);
+  // console.log(dataFormatted);
 
 
 

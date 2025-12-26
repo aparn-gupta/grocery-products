@@ -42,4 +42,7 @@ model Cart {
   Quantity  Int
   user      Users    @relation(fields: [userId], references: [id])
   product   Products @relation(fields: [productId], references: [id])
+
+
+  @@unique([userId, productId])
 }
