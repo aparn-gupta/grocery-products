@@ -1,9 +1,30 @@
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
+import client from "@/lib/redis";
+
 
 export async function GET(req, context) {
   let {userId} = await context.params;
   console.log(userId)
+
+
+  // await client.set("newkeyMango", "hehehehehehemango")
+
+  // const testRedis = await client.get("newkeyMango")
+
+  // console.log(testRedis)
+
+  const cachedCartData = await client.get(`user:${userId}`)
+
+  if (cachedCartData) {
+    console.log("cached cart data")
+    console.log(cachedCartData)
+
+    return NextResponse.json({cartData: JSON.parse(cachedCartData)})
+
+  }
+
+
 
   try {
     const cartData = await prisma.cart.findMany({
@@ -21,6 +42,11 @@ export async function GET(req, context) {
       }
       
     });
+
+    await client.set(`user:${userId}`, JSON.stringify(cartData))
+
+
+
 
     
 

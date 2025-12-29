@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/prisma'
 import { NextResponse } from 'next/server'
+import client from '@/lib/redis'
 
 export async function POST (req: Request, context) {
     const {userId, productId} = await context.params
@@ -41,6 +42,8 @@ export async function POST (req: Request, context) {
 
 
         console.log(updateCart)
+
+        await client.del(`user:${userId}`)
           
       
           return NextResponse.json({
@@ -63,6 +66,7 @@ export async function POST (req: Request, context) {
 
 
         console.log(insertItems)
+        await client.del(`user:${userId}`)
 
 
         return NextResponse.json({
