@@ -35,12 +35,14 @@ Client (Browser) -> Next.js Application -> API Routes -> Redis Cache -> Prisma O
 The application first checks Redis for cached data before querying the database through Prisma.
 
 
-## Getting Started
+## Run Locally
 
 ### 1. Clone the repository
 ### 2. Install dependencies
 ### 3. Set up environment variables using example file
-### 4. Run database migrations
+### 4. Run database migrations and use dummy data from sample database
+
+
 
 
 ---
